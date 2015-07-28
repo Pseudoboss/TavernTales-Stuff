@@ -30,12 +30,17 @@ class Trait():
 		return output
 
 class Carnage(Trait):
-	def __init__(self):
-		self.name = "Carnage"
-		self.theme = "Dragon"
-		self.category = "Combat"
-		self.desc = """when you spend advantage on an attack \
-					   and deal damage, maim the target"""
+	def __init__(self, player):
+		name = "Carnage"
+		theme = "Dragon"
+		category = "Combat"
+		desc = """when you spend advantage on an attack \
+				  and deal damage, maim the target"""
+		#~ def melee(self, target = None, increase = 0):
+			#~ result = self.rolls.roll(increase = increase)
+			#~ if increase > 0:
+				#~ if result.
+	
 		
 
 dragonsBreath = Trait("Dragon's Breath", "Dragon", "Combat", 

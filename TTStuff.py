@@ -3,8 +3,5 @@ from TTTraits import *
 from TTChars import *
 from TTRolls import *
 
-for x in range(0, 10):
+for x in range(0, 2):
 	combatRoll()
-
-while True:
-	print(input())
