@@ -10,9 +10,9 @@ class Trait():
 		self.activation = activation
 		self.action = action
 		traitList.append(self)
-		start()
+		self.start()
 		
-	def start():
+	def start(self):
 		pass
 	def __repr__(self):
 		return self.name
