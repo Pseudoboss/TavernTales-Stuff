@@ -1,3 +1,4 @@
+import types
 from TTTraits import *
 from TTRolls import *
 
@@ -5,7 +6,7 @@ charList = []
 
 class Character():
 
-	def __init__(self, name, toughness, statList, traits, desc,
+	def __init__(self, name, toughness, statList, mainStat, traits, desc,
 				 gear = [],
 				 notes = [],
 				 stAdvantage = {"Exploration" : 1, "combat" : 1}):
@@ -13,10 +14,11 @@ class Character():
 		self.toughness   = toughness
 		self.hpmax		 = 4*toughness
 		self.hp			 = self.hpmax
-		brawn   		 = statList[0]
-		finesse 		 = statList[1]
-		mind		     = statList[2]
-		spirit  		 = statList[3]
+		self.brawn    	 = statList[0]
+		self.finesse 	 = statList[1]
+		self.mind	     = statList[2]
+		self.spirit		 = statList[3]
+		self.mainStat	 = mainStat
 		self.traits      = traits
 		self.desc        = desc
 		self.gear        = gear
@@ -66,13 +68,22 @@ class Character():
 	def roll(self, num = 3, sides = 20, mod = 0, increase = 0):
 		return normRoll(num, sides, mod, increase, roller = self.rolls)
 
-	def melee(self, target = None, increase = 0):
-		return combatRoll(increase = increase, roller = self.rolls)
+	def melee(self, target = None, dice = 1, increase = 0, mod = None):
+		if mod == None:
+			mod = self.mainStat
+		return combatRoll(increase = increase, damsides = dice,
+						  roller = self.rolls)
+		
+	def ranged(self, target = None, dice = 1, increase = 0, mod = None):
+		if mod == None:
+			mod = self.mainStat
+		return combatRoll(increase = increase, damnum = dice, damsides = 6, 
+						  roller = self.rolls)
 
 	def __str__(self):
 		return self.getall()
 
-pseu = Character ("Pseu", 10, (1, 3, 2, -1), [],
+pseu = Character ("Pseu", 10, (1, 3, 2, -1), 3, [],
 "Pseu is a blue testdragon.")
 
 pseu.traits.append(dragonsBreath)
